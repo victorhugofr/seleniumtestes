@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="SigSaude">
+    <test name="colaborador">
+        <classes>
+            <class name="ColaboradorTest" />
+        </classes>
+
+    </test>
+    <test name="usuarioDoServico">
+    
+    </test>
+    <test name="usuarioDoServico">
+    
+    </test>
+    <test name="convenio">
+    
+    </test>
+    <test name="convenio">
+    
+    </test>
+</suite>
