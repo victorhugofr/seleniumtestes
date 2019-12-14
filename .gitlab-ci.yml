@@ -1,0 +1,39 @@
+#image: java:8-jdk
+image: node:8.10
+stages:
+  - build
+  - test
+
+before_script:
+#  - echo `pwd` # debug
+#  - echo "$CI_BUILD_NAME, $CI_BUILD_REF_NAME $CI_BUILD_STAGE" # debug
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+    
+build:
+  stage: build
+  allow_failure: true
+  script:
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
+  only:
+    - master
+
+test:
+  stage: test
+  image: selenium/standalone-firefox
+  dependencies:
+    - build
+  allow_failure: true
+  script:
+    - ./gradlew check --stacktrace
+    
+after_script:
+  - echo "End CI"
